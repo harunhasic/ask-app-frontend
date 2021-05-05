@@ -1,0 +1,179 @@
+@import "../defaults/defaults";
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #252525;
+  height: 60px;
+  padding-right: 11.1%;
+  padding-left: 11.1%;
+}
+
+.header-text {
+  font-family: $font-stack;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffffff;
+  letter-spacing: 0.49px;
+  font-size: 14px;
+    &:hover {
+        text-decoration: none;
+        color:gray;
+    }
+}
+
+.header-or {
+  font-family: $font-stack;
+  font-weight: bold;
+  font-size: 14px;
+  color: #9b9b9b;
+  letter-spacing: 0.49px;
+  margin: 0 0.8em 0 0.8em;
+}
+
+.header-title {
+  font-family: $font-stack;
+  font-weight: lighter;
+  font-size: 1em;
+  color: $blue-color;
+  letter-spacing: 0.84px;
+}
+
+.login-acccount {
+  padding-right: 4em;
+}
+
+.have-account {
+  font-size: 1em;
+  color: #9b9b9b;
+  letter-spacing: 0.63px;
+  margin-bottom: 4em;
+}
+
+.login-word {
+  text-decoration: none;
+  color: $blue-color;
+  letter-spacing: 0.63px;
+}
+
+.header-text {
+  text-decoration: none;
+  color: #f1f1f1;
+  font-size: 14px;
+}
+
+.header-logout {
+  text-decoration: none;
+  color: #9b9b9b;
+  font-size: 14px;
+}
+
+.lower-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  letter-spacing: 0.56px;
+  padding-right: 11.1%;
+  padding-left: 11.1%;
+  min-height: 80px;
+  flex-wrap: wrap;
+  color: #252525;
+  font-family: $font-stack;
+  font-weight: lighter;
+}
+
+.lower-header-brand {
+  font-size: 24px;
+  letter-spacing: 0.84px;
+  font-weight: lighter;
+  color: $blue-color;
+  padding-right: 250px;
+}
+
+.lower-header-brand:hover {
+  color: $blue-color;
+}
+
+.lower-header-search {
+  min-width: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.lower-header-search-icon {
+  position: absolute;
+  right: 8px;
+  font-size: 36px;
+  top: 9px;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.dark-nav-link {
+  font-size: 16px;
+  color: #252525;
+  letter-spacing: 0.56px;
+}
+
+.dark-nav-link:hover {
+  color: $blue-color;
+}
+
+.dark-active-nav-link {
+  color: $blue-color;
+  font-weight: bold;
+}
+
+.hello-user {
+  margin-right: 30px;
+}
+
+
+.welcome-msg {
+  font-size: 16px;
+  color: #fafafa;
+}
+
+.name-msg {
+  margin-left: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fafafa;
+}
+
+.dropdown-arrow {
+  background-color: #e9e9e9;
+  border: none;
+  border-radius: 50px;
+  &:hover {
+    background-color: black !important;
+  }
+
+  &:active {
+    background-color: white !important;
+  }
+
+  &:focus {
+    box-shadow: none !important;
+    background-color: white !important;
+  }
+}
+
+.dropdown-menu {
+    background-color: $silver-color;
+    font-size: 20px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.dropdown-item {
+    padding:5px;
+    color:inherit;
+    text-decoration: none;
+}

@@ -1,0 +1,57 @@
+@import "../defaults/defaults";
+
+.new-question-container {
+    border: 1px solid $silver-color;
+    max-width: 700px;
+    margin: 0 auto;
+    font-family: $font-stack;
+  }
+
+.new-question-form {
+    padding: 6.5%;
+  }
+  
+  .new-question-form > * {
+    margin-bottom: 30px;
+  }
+  
+  .question-title {
+    padding: 1.5% 0;
+    text-align: center;
+    background: #fafafa;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 0.85px;
+  }
+
+  .question-body {
+      display: flex;
+      height : 150px;
+      width: 100%;
+      text-align: left impo !important;
+      white-space: nowrap;
+      align-content: inherit i !important;
+
+  }
+
+  .form-control {
+      text-align: left;
+      justify-content: start !important;
+  }
+  
+  .button-submit {
+    width: 603px;
+    height: 57px;
+    border: 3px solid $blue-color;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 76px;
+    box-shadow: 3px 3px 0 0 rgba(131, 103, 216, 0.31);
+    width: 100%;
+    min-width: 50px;
+    max-width: 603px;
+  
+     &:hover {
+         background-color: darkgray;
+     }
+  }
