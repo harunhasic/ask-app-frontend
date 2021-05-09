@@ -7,6 +7,10 @@ import QuestionField from '../core/QuestionField';
 import {getUserId} from '../../utils/LocalStorage/LocalStorage'
 import QuestionService from '../../services/QuestionService'
 
+ //The getUserId() function from local storage utils fails to give the correct id (undefined)
+ const jsonUser = JSON.parse(localStorage.getItem('askapp-user'));
+ const id = (JSON.parse(jsonUser).id);
+
 export default class NewQuestion extends Component {
 
   constructor(props) {
@@ -18,7 +22,7 @@ export default class NewQuestion extends Component {
  
     this.state = {
       body: '',
-      userId: getUserId(),
+      userId: id,
       successful: false,
       message: ''
     };
@@ -50,7 +54,7 @@ export default class NewQuestion extends Component {
     });
     const params = {
       body: this.state.body,
-      userId: getUserId()
+      userId: this.state.userId
     }
     if (!this.checkBtn.context._errors.length) {
       this.questionService.addQuestion(params).then(response => {
