@@ -7,10 +7,6 @@ import {getUserId} from '../../utils/LocalStorage/LocalStorage'
 import AnswerService from '../../services/AnswerService';
 import { withRouter } from "react-router-dom";
 
- //The getUserId() function from local storage utils fails to give the correct id (undefined)
- const jsonUser = JSON.parse(localStorage.getItem('askapp-user'));
- const id = (JSON.parse(jsonUser).id);
-
 
 class NewAnswer extends Component {
 
@@ -23,7 +19,7 @@ class NewAnswer extends Component {
     
     this.state = {
       body: '',
-      userId: id,
+      userId: getUserId(),
       question_id: window.location.toString().split('#')[1],
       successful: false,
       message: ''
@@ -59,7 +55,7 @@ class NewAnswer extends Component {
     const params = {
       body: this.state.body,
       question_id: this.state.question_id,
-      user_id: this.state.userId
+      user_id: getUserId()
     }
     if (!this.checkBtn.context._errors.length) {
       this.answerService.addAnswer(params).then(() => {

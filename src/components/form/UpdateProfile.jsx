@@ -46,7 +46,7 @@ const id = (JSON.parse(jsonUser).id);
             setFirstname(user.firstname);
             setLastname(user.lastname);
             setEmail(user.email);
-            setPassword(user.password);
+            setPassword("Enter password");
              })
              setBusy(false);
         }catch (error) {
@@ -142,10 +142,10 @@ const id = (JSON.parse(jsonUser).id);
                   />
                 </div>
                 <div className="form-group">
-                  <PasswordField
+                <NameField
                     id="password"
                     name="password"
-                    type="password"
+                    type="text"
                     label="Password"
                     className="form-control"
                     value={password}

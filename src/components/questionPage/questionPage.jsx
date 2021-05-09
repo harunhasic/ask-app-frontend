@@ -55,8 +55,6 @@ useEffect(() => {
       fetchData();
     }, [])
 
-
-console.log(question)
 return (
     <React.Fragment>
             <div className="question-container">
