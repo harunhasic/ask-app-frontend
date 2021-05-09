@@ -5,17 +5,17 @@ import Form from 'react-validation/build/form';
 import CheckButton from 'react-validation/build/button';
 
 import {getUserId} from '../../utils/LocalStorage/LocalStorage'
-import QuestionService from '../../services/QuestionService'
+import AnswerService from '../../services/AnswerService'
 import UpdateField from '../core/UpdateField';
 import ErrorComponent from '../error/ErrorComponent'
 import { useHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
-const questionService = new QuestionService();
+const answerService = new AnswerService();
 
-const UpdateQuestion= () => {
+const UpdateAnswer= () => {
 
-  const [question, setQuestion] = useState(null);
+  const [answer, setAnswer] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [body, setBody] = useState('');
   const [hasError, setHasError] = useState(false);
@@ -25,15 +25,15 @@ const UpdateQuestion= () => {
   const [isBusy, setBusy] = useState(true);
 
   const history = useHistory();
-  const questionId = window.location.toString().split('#')[1];
+  const answerId = window.location.toString().split('#')[1];
 
   useEffect(() => {
+    
     async function fetchData() {
          try {
-            await questionService.getById(questionId).then(async response => {
-            const question = response.data.data;
-            setQuestion(question);
-            setBody(question.body);
+            await answerService.getById(answerId).then(async response => {
+            setAnswer(response.data.data);
+            setBody(response.data.data.body);
              })
              setBusy(false);
         }catch (error) {
@@ -50,48 +50,51 @@ const UpdateQuestion= () => {
 
 
   async function handleSubmit() {
-    const theQuestion = question;
-    const updatedQuestion = {
-      id: question.id,
+    const theAnswer = answer;
+    const updatedAnswer = {
+      id: theAnswer.id,
+      question_id: theAnswer.question_id,
       body: body
     }
     try {
-      await questionService.updateQuestion(updatedQuestion);
-      setQuestion(updatedQuestion);
-      setMessage( 'The question has been updated.');
+      await answerService.updateAnswer(updatedAnswer);
+      setAnswer(updatedAnswer);
+      setMessage( 'The answer has been edited.')
       setSuccessful(true);
-      history.push(`/question/user#${question.id}`)
+      history.push(`/question/user#${updatedAnswer.question_id}`)
     } catch(error) {
       setSuccessful(false);
-      setMessage( 'There was a problem with updating.')
+      setMessage( 'There was a problem with editing.')
     }
+     
 }
 
   return (
     <div className="new-question-container">
     <div className="question-title">
-      Edit the question
+      Edit the Answer
     </div>
     <Form className='new-question-form'
       onSubmit={handleSubmit}
     >
       {isBusy ?
        <div></div>
-      :   <div>
-      <div className="form-group">
-        <UpdateField
-          id="body"
-          name="body"
-          type="text"
-          label="Edit your qestion"
-          className="question-body"
-          value={body}
-          onChange={e => onChangeBody(e.target.value)}
-        />
+      :  
+      <div>
         <div className="form-group">
-          <Button onClick={handleSubmit} className="button-submit">Submit</Button>
+            <UpdateField
+            id="body"
+            name="body"
+            type="text"
+            label="Enter Question"
+            className="question-body"
+            value={body}
+            onChange={e => onChangeBody(e.target.value)}
+            />
+            <div className="form-group">
+                <Button onClick={handleSubmit} className="button-submit">Submit</Button>
+            </div>
         </div>
-      </div>
     </div>
       }
       {message && (
@@ -116,4 +119,4 @@ const UpdateQuestion= () => {
    );
 }
 
-export default UpdateQuestion
+export default UpdateAnswer

@@ -3,10 +3,11 @@ import BaseService from './BaseService'
 
 export default class QuestionService extends BaseService {
     
-    getAllQuestions() {
+    getAllQuestions(params) {
         return this.baseApi({
             method: 'GET',
-            url: '/api/main/'
+            url: '/api/main/',
+            params: params
         });
     }
 
@@ -42,10 +43,11 @@ export default class QuestionService extends BaseService {
         })
     }
 
-    updateQuestion(questionId) {
+    updateQuestion(params) {
         return this.authorizedApi({
             method: 'PUT',
-            url: `/api/questions/${questionId}`
+            url: `/api/questions/`,
+            data: params
         })
     }
 
@@ -53,6 +55,28 @@ export default class QuestionService extends BaseService {
         return this.authorizedApi({
             method:'DELETE',
             url: `/api/questions/${questionId}`
+        })
+    }
+
+    getByUserId(userId, params) {
+        return this.authorizedApi({
+            method:'GET',
+            url: `/api/questions/profile/${userId}`,
+            params: params
+        })
+    }
+
+    likeQuestion(questionId) {
+        return this.authorizedApi({
+            method: 'POST',
+            url: `api/questions/like/${questionId}`
+        })
+    }
+
+    dislikeQuestion(questionId) {
+        return this.authorizedApi({
+            method: 'DELETE',
+            url: `api/questions/like/${questionId}`
         })
     }
 }

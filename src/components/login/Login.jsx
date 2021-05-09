@@ -35,7 +35,7 @@ class Login extends Component {
     });
   }
 
-  toProfile() {
+  toHome() {
     this.props.history.push('/');
   }
 
@@ -60,7 +60,7 @@ class Login extends Component {
         password: this.state.password
       };
       this.authService.login(user).then(() => {
-        this.toProfile();
+        this.toHome();
         window.location.reload();
         this.userService.getByMail(user.email).then(response => {
           saveUser(response.data);

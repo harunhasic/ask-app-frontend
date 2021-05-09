@@ -4,13 +4,11 @@ import { useHistory } from 'react-router-dom';
 import QuestionService from '../../services/QuestionService'
 import UserService from '../../services/UserService'
 import '../../styles/landing/LandingPage.scss';
-import QuestionList from '../map/QuestionList'
-import ErrorComponent from '../error/ErrorComponent'
-import { questionUrl } from '../../utils/redirect/RedicertUrls'
+
 
 const questionService = new QuestionService();
 const userService = new UserService();
-
+let pageNumber = 1;
 const LandingPage = () => {
 
 const history = useHistory();
@@ -26,7 +24,7 @@ const toQuestion = (id) => {
 useEffect(() => {
 async function fetchData() {
      try {
-        await questionService.getAllQuestions().then(async response => {
+        await questionService.getAllQuestions({page:1, limit:20}).then(async response => {
         setQuestions(response.data.data);
          })
         await userService.getUsersByAnswers().then(response => {
@@ -42,26 +40,52 @@ async function fetchData() {
   fetchData();
 }, []);
  
+const showMoreQuestions = async () => {
+  pageNumber++;
+  const showMore = {
+      page: pageNumber,
+      limit:20
+  }
+  try {
+      const moreQuestions = await questionService.getAllQuestions(showMore);
+      setQuestions([...questions, ...moreQuestions.data.data])
+  } catch (e) {
+    pageNumber--;
+  }
+}
+
   return (
     <React.Fragment>
       <div className="landing-page-container">
-      <ListGroup variant="categories">
+      <ListGroup className="question-group" >
           <ListGroup.Item className="categories-link" >Latest Questions</ListGroup.Item>
           {
             questions.map(question => (
               <ListGroup.Item key={question.id} action onClick={() => toQuestion(question.id)}>{question.body}</ListGroup.Item>
             ))
           }
-        </ListGroup>
-        <ListGroup variant="categories">
+           {
+                  questions.length >=20 ?
+                    <div className="explore-more">
+                        <Button onClick={showMoreQuestions} className="show-more-button">
+                            SHOW MORE QUESTIONS
+                        </Button>
+                    </div> 
+                  : null
+                }
+      </ListGroup>
+      <div>
+        <ListGroup className="question-group" >
           <ListGroup.Item className="categories-link">Hot Questions !</ListGroup.Item>
           {
             theMostLiked.map(question => (
               <ListGroup.Item key={question.id} action onClick={() => toQuestion(question.id)}>{question.body}</ListGroup.Item>
             ))
           }
-        </ListGroup>
-        <ListGroup variant="categories">
+      </ListGroup>
+      </div>
+      <div>
+        <ListGroup className="question-group" >
           <ListGroup.Item className="categories-link">Users with most answers</ListGroup.Item>
           {
             monstAnswers.map(user => (
@@ -70,6 +94,8 @@ async function fetchData() {
           }
         </ListGroup>
         </div>
+        </div>
+        
     </React.Fragment>
   );
 }

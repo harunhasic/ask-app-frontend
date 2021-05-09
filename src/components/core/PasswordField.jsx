@@ -1,5 +1,6 @@
 import React from 'react';
 import Input from 'react-validation/build/input';
+import '../../styles/core/Input.scss'
 
 function vpassword(value) {
   if (value.length < 5 || value.length > 40) {

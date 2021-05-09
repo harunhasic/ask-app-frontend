@@ -5,10 +5,13 @@ import '../../styles/header/Header.scss';
 import { Nav, Navbar, Dropdown } from 'react-bootstrap';
 import { isTokenValid, removeSession } from '../../utils/LocalStorage/LocalStorage';
 import { useHistory } from "react-router";
-import { home,registerUrl, loginUrl } from '../../utils/redirect/RedicertUrls';
+import { home,registerUrl, loginUrl, myProfileUrl } from '../../utils/redirect/RedicertUrls';
 import * as qs from 'query-string';
 
-
+export const getUserMail = () => {
+    const user = localStorage.getItem('askapp-user');
+    return user ? JSON.parse(user).email : null;
+}
 
 const Header = ({ loggedInState }) => {
 
@@ -51,7 +54,8 @@ const Header = ({ loggedInState }) => {
                     (
                         <div>
                             <div className="row">
-                                <div className="welcome-msg">Welcome </div>                            
+                                <div className="welcome-msg">Welcome,</div> 
+                                <div className="name-msg">{getUserMail()}</div>                           
                                 <Dropdown className="col">
                                     <Dropdown.Toggle
                                         size="sm"
@@ -98,7 +102,15 @@ const Header = ({ loggedInState }) => {
                     >
                         HOME
                     </NavLink>
+                    <NavLink
+                        className={"black-nav-link nav-link"}
+                        activeClassName="black-active-nav-link"
+                        to={myProfileUrl}
+                    >
+                        MY ACCOUNT
+                    </NavLink>
             </Nav>
+         
             </div>
         </div>
     </div>
