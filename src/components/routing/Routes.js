@@ -6,7 +6,7 @@ import Login from '../login/Login';
 import Register from '../register/Register';
 import LandingPage from '../landingPage/LandingPage'
 import NewQuestion from '../form/NewQuestion'
-import QuestionPage from '../questionPage/QuestionPage'
+import QuestionPage from '../questionPage/questionPage'
 import UpdateQuestion from '../form/UpdateQuestion'
 import NewAnswer from '../form/NewAnswer';
 import ProfilePage from '../profile/ProfilePage';
