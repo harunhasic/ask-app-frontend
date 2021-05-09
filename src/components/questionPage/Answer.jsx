@@ -9,15 +9,19 @@ import AnswerService from '../../services/AnswerService';
 
 const questionService = new QuestionService();
 const answerService = new AnswerService();
+ //The getUserId() function from local storage utils fails to give the correct id (undefined)
+ const jsonUser = JSON.parse(localStorage.getItem('askapp-user'));
 
 const Answer = ({ userId, answerUser, isEditable, answerBody, author, answerId }) => {
 
 const [hasError, setHasError] = useState(false);
 const [errorMessage, setErrorMessage] = useState(null);
+const [user, setUser] = useState({});
+
 const history = useHistory();
 
 useEffect(() => {
-
+        setUser(jsonUser);
     }, [])
 
  const onDelete=()=> {
@@ -35,7 +39,6 @@ function onUpdate() {
     history.push(`/answer/update/#${answerId}`)
     window.location.reload();
 }
-
 
 return (
     <React.Fragment>

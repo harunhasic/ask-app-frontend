@@ -11,6 +11,8 @@ import ErrorComponent from '../error/ErrorComponent';
 import {Button} from 'react-bootstrap';
 
 const questionService = new QuestionService();
+ //The getUserId() function from local storage utils fails to give the correct id (undefined)
+ const jsonUser = JSON.parse(localStorage.getItem('askapp-user'));
 
 const QuestionPage = (loggedInState) => {
 
@@ -28,12 +30,11 @@ const [answers, setAnswers] = useState([]);
 const [isBusy, setBusy] = useState(true);
 const [editable, setEditable] = useState(false);
 const [isAnswerEditable, setIsAnswerEditable] = useState(false);
-const [id, setId] = useState();
+const [user, setUser] = useState();
 
 useEffect(() => {
-    //The getUserId() function from local storage utils fails to give the correct id (undefined)
-    const jsonUser = JSON.parse(localStorage.getItem('askapp-user'));
-    setId(jsonUser.id)
+   
+    setUser(JSON.parse(jsonUser).id)
     const questionId = window.location.toString().split('#')[1]
     const fetchData =async() => {
         try {
@@ -84,7 +85,7 @@ return (
                             key={answer.id}
                              answerBody={answer.body}
                              author={answer.user.firstname}
-                             userId={id}
+                             userId={user}
                              answerUser={answer.user.id}
                              answerId={answer.id}
                            />
