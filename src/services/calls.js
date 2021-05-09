@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from '../utils/LocalStorage/LocalStorage';
 
 export const authorizedApi = axios.create({
-    baseURL: "http://localhost:8080"
+    baseURL: "https://ask-app-backend-2021.herokuapp.com/"
 });
 
 authorizedApi.interceptors.request.use(config => {
